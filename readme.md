@@ -2,7 +2,7 @@
 
 Ubuntu 20.04 LTS *OGRE 1.x* C++ starter project template with [Scons](https://scons.org) build system. Just clone, build (verify it is working) and start prototyping.
 
-- [OGRE hello](#ogre-hello)
+- [OGRE starter project](#ogre-starter-project)
 	- [Setup](#setup)
 	- [Sample](#sample)
 	- [Resources (optional)](#resources-optional)
