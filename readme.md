@@ -2,7 +2,9 @@
 
 *OGRE 1.x* C++ starter template for easy prototyping on *Ubuntu 20.04 LTS* with [Scons](https://scons.org) build system. There are just three easy steps [setup](#1-setup), [clone](#2-clone) and [build & run](#3-build--run) and you are ready to start prototyping.
 
-> optionally you can download *OGRE* sources, see [next step](#4-next-steps-optional) section for more info
+> if you are not yet familiar with *SCons* watch out [scons-starter](https://github.com/sansajn/scons-starter) tutorial
+
+> optionally download *OGRE* sources, see [next step](#4-next-steps-optional) section for further informations
 
 ## 1. setup
 
