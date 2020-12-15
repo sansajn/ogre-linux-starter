@@ -1,4 +1,4 @@
-// OGRE 1.12 starter project
+// OGRE 1.12 starter sample
 #include <Ogre.h>
 #include <OgreApplicationContext.h>
 
@@ -22,9 +22,12 @@ MyTestApp::MyTestApp()
 bool MyTestApp::keyPressed(KeyboardEvent const & evt)
 {
 	if (evt.keysym.sym == SDLK_ESCAPE)
+	{
 		getRoot()->queueEndRendering();
-
-	return true;
+		return true;
+	}
+	else
+		return false;  // key not processed
 }
 
 void MyTestApp::setup()

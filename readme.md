@@ -4,27 +4,93 @@
 
 > if you are not yet familiar with *SCons* watch out [scons-starter](https://github.com/sansajn/scons-starter) tutorial
 
-> optionally download *OGRE* sources, see [next step](#4-next-steps-optional) section for further informations
 
 ## 1. setup
 
-The easiest way to start with *OGRE* is from official package, command
+Normally the easiest way to start with *OGRE* is from official package (`libogre-1.12-dev`), but I've found that it is broken in *Ubuntu 20.04 LTS* (user input is not working at all). Luckilly for us the solution is dead simple. We are going to build the library by are own!
+
+- install dependencies with
 
 ```bash
-sudo apt install g++ pkg-config scons libogre-1.12-dev
+sudo apt install libxaw7-dev libsdl2-dev libgles2-mesa-dev libxt-dev libzzip-dev libfreetype-dev scons g++ pkg-config git
 ```
-> you can also install *OGRE* documentation as `ogre-1.12-doc` and tools as `ogre-1.12-tools` package 
 
-will do the magik for you.
+command.
 
-One think needs to be done in *Ubuntu 20.04 LTS* before we can continue. Library files were installed to `/usr/lib/x86_64-linux-gnu/OGRE-1.12/` but *OGRE* is looking in `/usr/lib/x86_64-linux-gnu/OGRE/` directory. I think this will be fixed in some recent *OGRE* package update, but for now we can create link with 
+> **tip**: you can skip `libgles2-mesa-dev` package if you do not need *OpenGL ES2/3* renderer support
+
+
+- download source code from *OGRE* [repository](https://github.com/OGRECave/ogre) with
+
+```bash
+git clone https://github.com/OGRECave/ogre.git
+```
+
+command
+
+- checkout newest 1.x version with 
+
+```bash
+cd ogre
+git checkout -b v1.12.9 v1.12.9 
+```
+
+> currently the newest available 1.x version is 1.12.9
+
+commands.
+
+
+- configure *OGRE* with
+
+```
+mkdir build
+cd build
+cmake -DOGRE_BUILD_RENDERSYSTEM_GLES2=TRUE -DOGRE_BUILD_PLUGIN_ASSIMP=FALSE  ..
+```
+
+> **tip**: omit `-DOGRE_BUILD_RENDERSYSTEM_GLES2=TRUE` in case you do not need *OpenGL ES2/3* renderer support
+
+> **note**: in case you have installed `libassimp-dev` package, building *OGRE* will fail with dependency issues (`No rule to make target 'Dependencies/lib/IrrXML.lib', needed by 'lib/Codec_Assimp.so.1.12.9'`), that is why  `-DOGRE_BUILD_PLUGIN_ASSIMP=FALSE` configuration option used
+
+- build *OGRE* with
+
+```bash
+make -j4
+```
+
+command.
+
+- install *OGRE* with
+
+```bash
+sudo make install
+```
+
+command.
+
+> **note**: the library is installed in `/usr/local` directory
+
+
+- configure dynamic linker run-time bindings with
+
+```bash
+sudo ldconfig
+```
+
+command, otherwise system can't see newly installed libraries and you will end up with *cannot open shared object file ...* complains after you try run *OGRE* application.
+
+
+- create link for `libzzip.so.13` which is installed as `libzzip-0.so.13` in *Ubuntu 20.04 LTS* with
 
 ```bash
 cd /usr/lib/x86_64-linux-gnu
-sudo ln -s OGRE-1.12/ OGRE
+sudo ln -s libzzip-0.so.13 libzzip.so.13
 ```
 
-commands to get it working.
+commands.
+
+> **tip**: optionally you can also install *OGRE* documentation as `ogre-1.12-doc` and tools as `ogre-1.12-tools` packages 
+
 
 ## 2. clone 
 
@@ -61,17 +127,7 @@ will run the sample app. In my case I can now see
 
 You are done, feel free to modify ...
 
-## 4. next steps (optional)
-
-It is also good (but optional) to have *OGRE* [repository](https://github.com/OGRECave/ogre) cloned, because documentation refers to resource files there. Use
-
-```bash
-git clone https://github.com/OGRECave/ogre.git
-```
-
-command to clone *OGRE* repository. Resource files can be found in `ogre/Samples/Media` directory. Do not forget on samples in `ogre/Samples` and tutorial samples in `ogre/Samples/Tutorials` directories.
-
-> there is great jump-in tutorial for *OGRE* [there](https://ogrecave.github.io/ogre/api/latest/tutorials.html)
+> **tip**: there is great jump-in tutorial for *OGRE* [there](https://ogrecave.github.io/ogre/api/latest/tutorials.html)
 
 
 Adam Hlavatovic
