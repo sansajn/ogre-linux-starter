@@ -7,7 +7,7 @@
 
 ## 1. setup
 
-Normally the easiest way to start with *OGRE* is from official package (`libogre-1.12-dev`), but I've found that it is broken in *Ubuntu 20.04 LTS* (user input is not working at all). Luckilly for us the solution is dead simple. We are going to build the library by are own!
+Normally the easiest way to start with *OGRE* is from official package (`libogre-1.12-dev`), but I've found that it is broken in *Ubuntu 20.04 LTS* (user input is not working at all). Luckily for us the solution is dead simple. We are going to build the library by are own!
 
 - install dependencies with
 
